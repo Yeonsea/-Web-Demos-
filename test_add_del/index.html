@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<style>
+.tag:not(body).is-success {
+    background-color: #23d160;
+    color: #fff;
+    margin-top: .45em;
+    margin-left: .45em;
+}
+.tag:not(body) {
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #4a4a4a;
+    display: inline-flex;
+    font-size: .75rem;
+    height: 2em;
+    justify-content: center;
+    line-height: 1.5;
+    padding-left: .75em;
+    padding-right: .75em;
+    white-space: nowrap;
+}
+.tag:not(body) .delete {
+    margin-left: .25rem;
+    margin-right: -.375rem;
+}
+.is-small.delete, .is-small {
+    height: 16px;
+    max-height: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    min-width: 16px;
+    width: 16px;
+}
+.delete {
+    -webkit-appearance: none;
+    background-color: rgba(10,10,10,.2);
+    border: none;
+    border-radius: 290486px;
+    cursor: pointer;
+    pointer-events: auto;
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    outline: 0;
+    position: relative;
+    vertical-align: top;
+}
+.delete:hover {
+    background-color: rgba(10,10,10,.5);
+}
+.delete::before {
+    height: 2px;
+    width: 50%;
+}
+.delete::after {
+    height: 50%;
+    width: 2px;
+}
+.delete::after, .delete::before {
+    background-color: #fff;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+::selection {
+    background-color: #00d1b2;
+    color: #fff;
+}
+
+.input {
+    box-shadow: inset 0 1px 2px rgba(10,10,10,.1);
+    max-width: 100%;
+    width: 50%;
+    height: 1.5rem;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #363636;
+    margin-left: .45em;
+}
+
+.clear {
+    height: 1.5rem;
+}
+
+.button.is-medium {
+    font-size: 1.25rem;
+}
+.save {
+    margin-left: .45em;
+    max-width: 100%;
+}
+.button {
+    width: 50%;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: #363636;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid rgba(10,10,10,.1);
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.25em;
+    line-height: 1.5;
+    padding-bottom: calc(.375em - 1px);
+    padding-left: 0px;
+    padding-right: 5px;
+    padding-top: calc(.375em - 1px);
+    position: relative;
+    vertical-align: top;
+}
+.button:hover {
+    border: 1px solid rgba(10,10,10,.3);
+}
+.button:active {
+    border: 1px solid rgba(10,10,10,.7);
+}
+</style>
+<script>
+    function del(event){
+        // var that =this;
+        event.target.parentElement.remove();
+    };
+
+$(function () {
+    var arr = ["a", "b", "br", "f", "o", "我太难了", "ok", "ojbk", "臭弟弟", "带文豪"];
+    if(null != arr && arr.length > 0) {
+        arr.forEach(function(item){
+            var dom = $('<span class="tag is-success" style="background-color: #89c4f4">' +
+                    '<p class="suc_value">'+ item +'</p>' +
+                    '<button class="delete is-small" type="button" onclick="del(event)"></button>' +
+                    '</span>')
+            $(".block").append(dom);
+        })
+        $(".block").append("<br/>");
+    }
+    $('#corp_input').bind('keyup', function(event) {
+    　　if (event.keyCode == "13") {
+            var flag = true;
+            var corp = $("#corp_input").val();
+            if (corp == "") {
+                return;
+            }
+            $(".suc_value").each(function(index, item){
+                var v = $(item).html();
+                if (corp == v) {
+                    flag = false;
+                    return false;
+                }
+            });
+            if (flag) {
+                var dom = $('<span class="tag is-success">' +
+                    '<p class="suc_value">'+ corp +'</p>' +
+                    '<button class="delete is-small" type="button" onclick="del(event)"></button>' +
+                    '</span>')
+                $(".block").append(dom);
+            }
+            $("#corp_input").val("");
+    　　}
+    });
+})
+</script>
+<body>
+    <h2>=== Corp Code + Face ===</h2>
+    <div class="control">
+        <input id="corp_input" class="input" type="text" placeholder="Corp Code">
+    </div>
+    <div class="clear"></div>
+    <form>
+        <tr>
+            <td>
+                <div class="block">
+                    <!-- <span class="tag is-success">
+                        <p class="suc_value">Hello World</p>
+                        <button class="delete is-small"></button>
+                    </span> -->
+                </div>
+            </td>
+        </tr>
+        <div class="clear"></div>
+        <tr>
+            <td>
+                <div class="save">
+                    <a class="button is-medium">Save</a>
+                </div>
+            </td>
+        </tr>
+    </form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400&display=swap");
+body {
+  margin: 0;
+  height: 100vh;
+  background: #BFD1D9;
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  background: white;
+  width: 50%;
+  padding: 2em;
+  border-radius: 10px;
+  height: 5%;
+}
+
+.container h1, .container img, .container .price {
+  display: inline-block;
+  margin: 0;
+}
+
+.container .price {
+  float: right;
+  font-size: 1.7em;
+  color: #008BF5;
+}
+
+.container img {
+  cursor: pointer;
+  margin-left: 10px;
+  width: 28PX;
+}
+
+.container .info {
+  display: none;
+}
+
+.item {
+  margin: 2em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 75% auto;
+      grid-template-columns: 75% auto;
+}
+
+.item a {
+  text-decoration: none;
+  color: #008BF5;
+  font-size: 1.3em;
+}
+
+.item .subprice {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.item .description p {
+  margin: 0;
+}
+/*# sourceMappingURL=main.css.map */

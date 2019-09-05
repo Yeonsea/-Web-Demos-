@@ -1,0 +1,58 @@
+
+body {
+    font-family: 'Nunito';
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.card {
+    border: none;
+    box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.16);
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 1.6rem;
+
+    span {
+        color: #8000FF;
+    }
+}
+
+@media only screen and (min-width : 700px) {
+
+    .card {
+        will-change: transform;
+        transition: transform 1s;
+    
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+a.tag {
+    margin-top: 1em;
+    display: block;
+    text-indent: 1.3em;
+    background: url('../images/tag.svg') no-repeat;
+    background-position: 0 1px;
+    font-size: .85rem;
+}
+
+@media only screen and (min-width : 1300px) {
+    body {
+        font-size: 27px;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+
+}
