@@ -42,7 +42,7 @@ body {
         margin-top: 2em;
     }
 
-    input, button {
+    input, .button {
         width: calc(100% - 3em);
         padding: .5em;
         font-size: 1.3em;
@@ -50,13 +50,28 @@ body {
         margin: 1em;
     }
 
-    button {
+    .button {
         width: calc(100% - 2em);
         margin: 0;
         background: #8800FF;
         color: white;
         border: none;
         cursor: pointer;
+    }
+
+    .error {
+        // visibility: hidden;
+        display: none;
+    }
+
+    .error.errorAnim {
+        // visibility: visible;
+        display: block;
+    }
+
+    #success {
+        // visibility: hidden;
+        display: none;
     }
 }
 
@@ -76,12 +91,45 @@ body {
     }
 }
 
+.fadeout {
+    animation: fadeout 1s forwards;
+}
+
+.fadein {
+    animation: fadein 1s forwards;
+    display: block !important;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        display: block;
+        opacity: 0;
+    }
+    1% {
+        display: block;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        display: block;
+    }
+}
+
 @media only screen and (min-width: 768px) {
     body {
         font-size: 20px;
     }
 
-    button {
+    .button {
         width: 60% !important;
     }
 
@@ -135,7 +183,7 @@ body {
             margin: 1em 0;
         }
 
-        button {
+        .button {
             width: 100% !important;
         }
     }
