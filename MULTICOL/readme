@@ -1,0 +1,2 @@
+Create layouts for content heavy pages using CSS multi-columns. 
+This technique doesn't utilize flexbox or the grid, but instead, it uses a series of properties that allows you to easily structure columns and rows for this type of layout.
