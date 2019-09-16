@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- <script src="js/index.js"></script> -->
+</head>
+<body>
+        
+    <section>
+        <h1>Above the fold content =O</h1>
+    </section>
+
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/i.jpg" alt="lazy" loading="lazy"  class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/am.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/so.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/damn.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/lazy.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/this.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/feels.jpg" alt="lazy" loading="lazy" class="lazyload" >
+    <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/great.jpg" alt="lazy" loading="lazy" class="lazyload" >
+
+    <script>
+        if ('loading' in HTMLImageElement.prototype) {
+            //Native Lazy Loading Supported!
+
+            console.log('yay!')
+
+            const images = document.querySelectorAll('img[loading="lazy"]')
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            })
+        } else {
+            // Not supported!
+
+            console.log('boo!')
+
+            const script = document.createElement('script')
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>
