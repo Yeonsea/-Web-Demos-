@@ -24,24 +24,88 @@
     <img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2621168/great.jpg" alt="lazy" loading="lazy" class="lazyload" >
 
     <script>
-        if ('loading' in HTMLImageElement.prototype) {
-            //Native Lazy Loading Supported!
+        // Chrome 76+ Native
+        // if ('loading' in HTMLImageElement.prototype) {
+        //     //Native Lazy Loading Supported!
 
-            console.log('yay!')
+        //     console.log('yay!')
 
-            const images = document.querySelectorAll('img[loading="lazy"]')
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            })
-        } else {
-            // Not supported!
+        //     const images = document.querySelectorAll('img[loading="lazy"]')
+        //     images.forEach(img => {
+        //         img.src = img.dataset.src;
+        //     })
+        // } else {
+        //     // Not supported!
 
-            console.log('boo!')
+        //     console.log('boo!')
 
-            const script = document.createElement('script')
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js';
-            document.body.appendChild(script);
-        }
+        //     const script = document.createElement('script')
+        //     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js';
+        //     document.body.appendChild(script);
+        // }
+
+        // 利用intersection observer
+        // document.addEventListener("DOMContentLoaded", function() {
+        // var lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
+
+        // if ("IntersectionObserver" in window) {
+        //     let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+        //         entries.forEach(function(entry) {
+        //             if (entry.isIntersecting) {
+        //                 let lazyImage = entry.target;
+        //                 lazyImage.src = lazyImage.dataset.src;
+        //                 // lazyImage.srcset = lazyImage.dataset.srcset;
+        //                 lazyImage.classList.remove("lazyload");
+        //                 lazyImageObserver.unobserve(lazyImage);
+        //             }
+        //         });
+        //     });
+
+        //     lazyImages.forEach(function(lazyImage) {
+        //         lazyImageObserver.observe(lazyImage);
+        //     });
+        // } else {
+        //     // Possibly fall back to a more compatible method here
+        // }
+        // });
+
+        // 利用事件
+        document.addEventListener("DOMContentLoaded", function() {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
+        let active = false;
+
+        const lazyLoad = function() {
+            if (active === false) {
+            active = true;
+
+            setTimeout(function() {
+                lazyImages.forEach(function(lazyImage) {
+                if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                    lazyImage.src = lazyImage.dataset.src;
+                    // lazyImage.srcset = lazyImage.dataset.srcset;
+                    lazyImage.classList.remove("lazyload");
+
+                    lazyImages = lazyImages.filter(function(image) {
+                    return image !== lazyImage;
+                    });
+
+                    if (lazyImages.length === 0) {
+                    document.removeEventListener("scroll", lazyLoad);
+                    window.removeEventListener("resize", lazyLoad);
+                    window.removeEventListener("orientationchange", lazyLoad);
+                    }
+                }
+                });
+
+                active = false;
+            }, 200);
+            }
+        };
+
+        document.addEventListener("scroll", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        window.addEventListener("orientationchange", lazyLoad);
+        });
     </script>
 </body>
 </html>
